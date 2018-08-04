@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="485.0" prefWidth="432.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mum.asd.controller.RegisterController">
+<AnchorPane prefHeight="485.0" prefWidth="432.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.controller.RegisterController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="638.0" stroke="BLACK" strokeType="INSIDE" width="432.0" />
       <TextField fx:id="email" layoutX="134.0" layoutY="79.0" prefHeight="25.0" prefWidth="230.0" />
