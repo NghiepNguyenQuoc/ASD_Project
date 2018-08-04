@@ -5,10 +5,6 @@ import java.util.List;
 
 import com.myhotel.domain.Room;
 
-/**
- * @author vynguyen
- *
- */
 public class ServiceDirector {
 	private ServiceBuilder serviceBuilder;
 

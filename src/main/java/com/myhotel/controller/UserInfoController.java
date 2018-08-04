@@ -109,11 +109,6 @@ public class UserInfoController extends ApplicationController implements Initial
 		setBookingColumnProperties();
 		setCardColumnProperties();
 		
-		/*
-		 * Template Method Design Pattern
-		 * Tan Tho Nguyen
-		 * Client
-		 */
 		UserProfile userProfile = new ViewUserInformation();
 		userProfile.showProfileUser(currentUser, bookingTableView, cardTableView);
 		

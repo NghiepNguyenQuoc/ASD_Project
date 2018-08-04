@@ -20,8 +20,7 @@ import com.myhotel.service.HotelUserService;
 import com.myhotel.service.PaymentService;
 import com.myhotel.view.FxmlView;
 
-// Proxy Pattern
-// Tan Tho Nguyen
+
 public class RegisterProxy {
     @Autowired
     public StageManager stageManager;
@@ -36,7 +35,6 @@ public class RegisterProxy {
 	private PaymentService paymentService;
 	
 	public void save(HotelUser entity) {
-		// Proxy - Validate before save - Tan Tho Nguyen
 		if(HotelValidator.validate("Email", entity.getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
 			HotelValidator.validate("First Name", entity.getFirstName(), "[a-zA-Z]+") &&
 			HotelValidator.validate("Last Name", entity.getLastName(), "[a-zA-Z]+") && 

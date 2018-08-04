@@ -14,10 +14,7 @@ import com.myhotel.service.HotelUserService;
 
 import javax.transaction.Transactional;
 
-/**
- * @author vynguyen
- *
- */
+
 //@Component
 //@Configurable
 	@Transactional

@@ -2,10 +2,6 @@ package com.myhotel.domain.bookingprices;
 
 import com.myhotel.domain.Room;
 
-/**
- * @author vynguyen
- *
- */
 public class ServiceElementDoVisitor implements ServiceElementVisitor {
 	private double price;
 

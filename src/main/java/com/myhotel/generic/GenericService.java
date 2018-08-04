@@ -2,10 +2,6 @@ package com.myhotel.generic;
 
 import java.util.List;
 
-/**
- * @author Ram Alapure
- * @since 05-04-2017
- */
 
 public interface GenericService<T extends Object> {
 

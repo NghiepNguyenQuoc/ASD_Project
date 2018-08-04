@@ -35,10 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * @author vynguyen
- *
- */
+
 @Controller
 public class BookingController extends ApplicationController implements Initializable {
 	private ServiceDirector serviceDirector;

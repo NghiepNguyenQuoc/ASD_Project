@@ -8,11 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
-/*
- * Template Method Design Pattern
- * Tan Tho Nguyen
- * Concrete Class
- */
 
 public class ViewUserInformation extends UserProfile {
 	private ObservableList<Booking> bookingListObservable = FXCollections.observableArrayList();

@@ -6,11 +6,6 @@ import com.myhotel.domain.HotelUser;
 
 import javafx.scene.control.TableView;
 
-/*
- * Template Method Design Pattern
- * Tan Tho Nguyen
- * Abstract class
- */
 
 public abstract class UserProfile {
 	public void showProfileUser(HotelUser user, TableView<Booking> bookingTableView, TableView<Card> cardTableView) {

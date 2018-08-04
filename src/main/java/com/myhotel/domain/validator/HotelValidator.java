@@ -7,10 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class HotelValidator {
-	/*
-	 * Validations
-	 * Tan Tho Nguyen
-	 */
+	
 	public static boolean validate(String field, String value, String pattern){
 		if(!value.isEmpty()){
 			Pattern p = Pattern.compile(pattern);

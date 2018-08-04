@@ -31,9 +31,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-/**
- * @author Tan Tho Nguyen
- */
 
 @Controller
 public class RegisterController extends ApplicationController implements Initializable{
@@ -107,14 +104,12 @@ public class RegisterController extends ApplicationController implements Initial
 		hotelUser.setAddress(address);
 		
 		// Set user type - Strategy
-		// Tan Tho Nguyen
 		UserType userType = new UserType();
 		userType.setStrategy(new CustomerStrategy());
 		hotelUser = userType.createUser(hotelUser);
 		
 		
 		// Call Register Proxy
-		// Tan Tho Nguyen
 		registerProxy.save(hotelUser);
 		
     }

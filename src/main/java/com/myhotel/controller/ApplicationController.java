@@ -25,10 +25,7 @@ public class ApplicationController {
     @Autowired
     public StageManager stageManager;
 	
-	/*
-	 * Show user info
-	 * Tan Tho Nguyen
-	 */
+	
 	
 	
 	public void showUserInfo() {
@@ -39,10 +36,6 @@ public class ApplicationController {
 	}
 
 
-	/*
-	 * Logout
-	 * Tan Tho Nguyen
-	 */
     public void logout() {
 		if (stageManager == null){
 			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
@@ -52,18 +45,12 @@ public class ApplicationController {
 	
 
 	
-	/*
-	 * Get String From Resource Bundle
-	 * Tan Tho Nguyen
-	 */
+	
 	public String getStringFromResourceBundle(String key){
         return ResourceBundle.getBundle("Bundle").getString(key);
     }
 	
-	/*
-	 * VyNguyen
-	 * Use for moving to Booking layout
-	 */
+	
 	public void goToBookingLayout(ServiceDirector serviceDirector) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Booking.fxml"));
@@ -83,10 +70,7 @@ public class ApplicationController {
 		}
 	}
 	
-	/*
-	 * VyNguyen
-	 * Use for moving to ViewRoom layout
-	 */
+	
 	public void goToViewRoomLayout() {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ViewRooms.fxml"));
@@ -104,10 +88,6 @@ public class ApplicationController {
 		}
 	}
 	
-	/*
-	 * VyNguyen
-	 * User for moving to AddCard layout
-	 */
 	public void gotoAddCardLayout(ServiceDirector serviceDirector) {
 		try {
 			// call booking form
