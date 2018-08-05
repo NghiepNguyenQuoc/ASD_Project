@@ -56,7 +56,7 @@ public class Main extends Application {
      * window.
      */
     protected void displayInitialScene() {
-        stageManager.switchScene(FxmlView.REGISTER);
+        stageManager.switchScene(FxmlView.LOGIN);
     }
 
     

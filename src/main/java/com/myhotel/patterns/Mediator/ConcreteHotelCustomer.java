@@ -34,8 +34,7 @@ public class ConcreteHotelCustomer extends HotelCustomer {
         HotelUserService hotelUserService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
         HotelUser hotelUser = hotelUserService.find(this.hotelUser.getId());
         hotelUser.getPromotions().add(promotion);
-//        PromotionRepository promotionRepository = ApplicationContextHolder.getContext().getBean(PromotionRepository.class);
-        PromotionRepository promotionRepository = PromotionRepositorySingleton.getInstance().getPromotionRepository();
+        PromotionRepository promotionRepository = PromotionRepositorySingleton.INSTANCE.getPromotionRepository();
         promotionRepository.save(promotion);
         HotelUserRepository hotelUserRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
         hotelUserRepository.save(hotelUser);

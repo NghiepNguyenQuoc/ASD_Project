@@ -4,21 +4,16 @@ import com.myhotel.domain.Promotion;
 import com.myhotel.repository.PromotionRepository;
 import com.myhotel.service.ApplicationContextHolder;
 
-public class PromotionRepositorySingleton {
-    public PromotionRepository getPromotionRepository() {
-        return promotionRepository;
-    }
+public enum PromotionRepositorySingleton {
+	INSTANCE;
 
-    private PromotionRepository promotionRepository;
-    private static PromotionRepositorySingleton Instance = null;
+	public PromotionRepository getPromotionRepository() {
+		if (promotionRepository == null) {
+			promotionRepository = ApplicationContextHolder.getContext().getBean(PromotionRepository.class);
+		}
 
-    private PromotionRepositorySingleton(){}
+		return promotionRepository;
+	}
 
-    public static PromotionRepositorySingleton getInstance(){
-        if (Instance == null){
-            Instance = new PromotionRepositorySingleton();
-            Instance.promotionRepository = ApplicationContextHolder.getContext().getBean(PromotionRepository.class);
-        }
-        return Instance;
-    }
+	private PromotionRepository promotionRepository;
 }
