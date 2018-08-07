@@ -16,6 +16,8 @@ import com.myhotel.config.StageManager;
 import com.myhotel.domain.HotelUser;
 import com.myhotel.domain.User;
 import com.myhotel.domain.UserType;
+import com.myhotel.logging.ChainPatternLogging;
+import com.myhotel.patterns.COR.AbstractLogger;
 import com.myhotel.patterns.FactoryMethod.PromotionName;
 import com.myhotel.patterns.Mediator.ConcreteHotelCustomer;
 import com.myhotel.patterns.Mediator.HotelCustomer;
@@ -67,16 +69,24 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private void loginAction(ActionEvent event) throws IOException {
-		if (hotelUserService.authenticate(getUsername(), getPassword())) {
-			HotelUser user = hotelUserService.findByEmail(getUsername());
-			if (user.getUserType() == UserType.Admin) {
-				stageManager.switchScene(FxmlView.ADMIN_HOME);
-			} else {
-				stageManager.switchScene(FxmlView.VIEWROOMS);
-			}
+		try {
+			if (hotelUserService.authenticate(getUsername(), getPassword())) {
+				HotelUser user = hotelUserService.findByEmail(getUsername());
+				if (user.getUserType() == UserType.Admin) {
+					stageManager.switchScene(FxmlView.ADMIN_HOME);
+				} else {
+					stageManager.switchScene(FxmlView.VIEWROOMS);
+				}
 
-		} else {
-			lblLogin.setText("Login Failed.");
+				loggerChain.logMessage(AbstractLogger.INFO, "Login successfully.");
+
+			} else {
+				lblLogin.setText("Login Failed.");
+
+				loggerChain.logMessage(AbstractLogger.INFO, "Login failed.");
+			}
+		} catch (Exception e) {
+			loggerChain.logMessage(AbstractLogger.ERROR, "Error Message: " + e.getMessage() + ", StackTrace: " + e.getStackTrace());
 		}
 	}
 
@@ -101,12 +111,14 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		sampleMethod();
 
+		loggerChain = ChainPatternLogging.getChainOfLoggers();
 	}
 
 	List<HotelUser> hotelUsers;
 	PromotionMediator promotionMediator;
 	HotelCustomer currentHotelCustomer;
 	boolean didSetUpMediator = false;
+	AbstractLogger loggerChain;
 
 	public void sampleMethod() {
 		sampleDataService.generateSampleData();
