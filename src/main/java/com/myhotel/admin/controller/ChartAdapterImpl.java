@@ -69,7 +69,6 @@ public class ChartAdapterImpl implements ChartAdapter {
 			String key = (String) it.next();
 			double value = data.get(key);
 			aSeries.getData().add(new XYChart.Data(key, value));
-
 		}
 		answer.addAll(aSeries);
 		return answer;
@@ -85,10 +84,11 @@ public class ChartAdapterImpl implements ChartAdapter {
 			if (monthlyData.containsKey(strYearMonth)) {
 				total = monthlyData.get(strYearMonth);
 			}
-			total += b.getPayment().getAmount();
+			if (b.getPayment() != null) {
+				total += b.getPayment().getAmount();
+			}
 			monthlyData.put(strYearMonth, total);
 		}
 		return monthlyData;
 	}
-
 }

@@ -22,6 +22,5 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.admin.controller.OverviewController">
 	<children>
-		<Label>Overview</Label>
 	</children>
 </AnchorPane>
