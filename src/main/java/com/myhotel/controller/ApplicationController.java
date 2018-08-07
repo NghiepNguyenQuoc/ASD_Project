@@ -35,8 +35,21 @@ public class ApplicationController {
 		stageManager.switchScene(FxmlView.USERINFO);
 	}
 
+	public void showCheckIn() {
+		if (stageManager == null){
+			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
+		}
+		stageManager.switchScene(FxmlView.CHECKIN);
+	}
 
-    public void logout() {
+	public void showViewRoom() {
+		if (stageManager == null){
+			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
+		}
+		stageManager.switchScene(FxmlView.VIEWROOMS);
+	}
+
+	public void logout() {
 		if (stageManager == null){
 			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
 		}

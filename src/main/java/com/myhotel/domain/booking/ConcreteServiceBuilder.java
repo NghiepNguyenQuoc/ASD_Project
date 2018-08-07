@@ -69,4 +69,9 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 	public Booking getBooking() {
 		return booking;
 	}
+	
+	public List<Booking> getBookings(String startDate, String endDate){
+		
+		return null;
+	}
 }

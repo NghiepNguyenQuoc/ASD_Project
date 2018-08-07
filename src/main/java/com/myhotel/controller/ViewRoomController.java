@@ -77,8 +77,6 @@ public class ViewRoomController extends ApplicationController implements Initial
 	private String searchKeyword;
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
 
-
-
 	@FXML
     private void exit(ActionEvent event) {
 		
