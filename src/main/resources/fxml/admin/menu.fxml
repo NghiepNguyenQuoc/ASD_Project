@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.MenuBar?>
+
+<MenuBar xmlns="http://javafx.com/javafx/8.0.40"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.myhotel.admin.controller.MenusController">
+	<menus>
+		<Menu mnemonicParsing="false" text="Home">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#overview"
+					text="Overview" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="Bookings">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#bookings"
+					text="Bookings List" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="Promotions">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#promotions"
+					text="Promotion List" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="Rooms">
+			<items>
+				<MenuItem mnemonicParsing="false" onAction="#rooms"
+					text="Room List" />
+			</items>
+		</Menu>
+		<Menu mnemonicParsing="false" text="Users">
+		<items>
+				<MenuItem mnemonicParsing="false" onAction="#users"
+					text="User List" />
+			</items>
+		</Menu>
+	</menus>
+</MenuBar>

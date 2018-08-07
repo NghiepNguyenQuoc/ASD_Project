@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.myhotel.config.StageManager;
 import com.myhotel.domain.HotelUser;
 import com.myhotel.domain.User;
+import com.myhotel.domain.UserType;
 import com.myhotel.patterns.FactoryMethod.PromotionName;
 import com.myhotel.patterns.Mediator.ConcreteHotelCustomer;
 import com.myhotel.patterns.Mediator.HotelCustomer;
@@ -36,60 +37,62 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-
 @Controller
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
 	@FXML
-    private Button btnLogin;
+	private Button btnLogin;
 
-    @FXML
-    private PasswordField password;
+	@FXML
+	private PasswordField password;
 
-    @FXML
-    private TextField username;
+	@FXML
+	private TextField username;
 
-    @FXML
-    private Label lblLogin;
-    
-    @Autowired
-    private HotelUserService hotelUserService;
+	@FXML
+	private Label lblLogin;
 
+	@Autowired
+	private HotelUserService hotelUserService;
 
-    @Autowired
+	@Autowired
 	AddressServiceImpl addressService;
 
-    @Autowired
+	@Autowired
 	SampleDataService sampleDataService;
-    
-    @Lazy
-    @Autowired
-    private StageManager stageManager;
-        
+
+	@Lazy
+	@Autowired
+	private StageManager stageManager;
+
 	@FXML
-    private void loginAction(ActionEvent event) throws IOException{
-    	if(hotelUserService.authenticate(getUsername(), getPassword())){
-    		    		
-    		stageManager.switchScene(FxmlView.VIEWROOMS);
-    		
-    	}else{
-    		lblLogin.setText("Login Failed.");
-    	}
-    }
-	
+	private void loginAction(ActionEvent event) throws IOException {
+		if (hotelUserService.authenticate(getUsername(), getPassword())) {
+			HotelUser user = hotelUserService.findByEmail(getUsername());
+			if (user.getUserType() == UserType.Admin) {
+				stageManager.switchScene(FxmlView.ADMIN_HOME);
+			} else {
+				stageManager.switchScene(FxmlView.VIEWROOMS);
+			}
+
+		} else {
+			lblLogin.setText("Login Failed.");
+		}
+	}
+
 	@FXML
-    private void btnRegister(ActionEvent event) throws IOException{
+	private void btnRegister(ActionEvent event) throws IOException {
 		stageManager.switchScene(FxmlView.REGISTER);
-    }
-	
+	}
+
 	public String getPassword() {
 		return password.getText();
 	}
 
 	public String getUsername() {
-		String text=username.getText();
-		if (!text.contains("@")){
-			text = text +"@gmail.com";
+		String text = username.getText();
+		if (!text.contains("@")) {
+			text = text + "@gmail.com";
 		}
 		return text;
 	}
@@ -99,20 +102,24 @@ public class LoginController implements Initializable{
 		sampleMethod();
 
 	}
+
 	List<HotelUser> hotelUsers;
 	PromotionMediator promotionMediator;
 	HotelCustomer currentHotelCustomer;
 	boolean didSetUpMediator = false;
-	public void sampleMethod(){
+
+	public void sampleMethod() {
 		sampleDataService.generateSampleData();
 	}
-	public void setupPromotionMediator(){
-		HotelUserRepository hotelUserRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
+
+	public void setupPromotionMediator() {
+		HotelUserRepository hotelUserRepository = ApplicationContextHolder.getContext()
+				.getBean(HotelUserRepository.class);
 		hotelUsers = hotelUserRepository.findAll();
 		promotionMediator = new PromotionMediatorImpl();
-		for (HotelUser hotelUser: hotelUsers){
-			HotelCustomer hotelCustomer = new ConcreteHotelCustomer(promotionMediator,hotelUser);
-			if (currentUser.getId() == hotelUser.getId()){
+		for (HotelUser hotelUser : hotelUsers) {
+			HotelCustomer hotelCustomer = new ConcreteHotelCustomer(promotionMediator, hotelUser);
+			if (currentUser.getId() == hotelUser.getId()) {
 				currentHotelCustomer = hotelCustomer;
 			}
 			promotionMediator.addHotelCustomer(hotelCustomer);
@@ -120,14 +127,14 @@ public class LoginController implements Initializable{
 	}
 
 //	@Scheduled(cron="0/2 * * * * *")
-	public void printHello(){
+	public void printHello() {
 		System.out.println("Hello World");
 	}
 
-	@Scheduled(cron="0/45 * * * * *")
+	@Scheduled(cron = "0/45 * * * * *")
 	public void broadCastPromotionToHoterlUser() {
-		if(currentUser!=null){
-			if (didSetUpMediator == false){
+		if (currentUser != null) {
+			if (didSetUpMediator == false) {
 				setupPromotionMediator();
 				didSetUpMediator = true;
 				System.out.println("did setup Mediator");

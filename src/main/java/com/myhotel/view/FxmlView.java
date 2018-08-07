@@ -4,100 +4,112 @@ import java.util.ResourceBundle;
 
 public enum FxmlView {
 
-    USER {
-        @Override
+	USER {
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("user.title");
-        }
+			return getStringFromResourceBundle("user.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/User.fxml";
-        }
-    }, 
-    LOGIN {
-        @Override
+			return "/fxml/User.fxml";
+		}
+	},
+	LOGIN {
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("login.title");
-        }
+			return getStringFromResourceBundle("login.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/Login.fxml";
-        }
-    },
-    REGISTER {
-        @Override
+			return "/fxml/Login.fxml";
+		}
+	},
+	REGISTER {
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("register.title");
-        }
+			return getStringFromResourceBundle("register.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/Register.fxml";
-        }
-    },
-    USERINFO{
-        @Override
+			return "/fxml/Register.fxml";
+		}
+	},
+	USERINFO {
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("userinfo.title");
-        }
+			return getStringFromResourceBundle("userinfo.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/UserInfo.fxml";
-        }
-    },
+			return "/fxml/UserInfo.fxml";
+		}
+	},
 	BOOKING {
-        @Override
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("booking.title");
-        }
+			return getStringFromResourceBundle("booking.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/Booking.fxml";
-        }
-    },
+			return "/fxml/Booking.fxml";
+		}
+	},
 	VIEWROOMS {
-        @Override
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("viewrooms.title");
-        }
+			return getStringFromResourceBundle("viewrooms.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/ViewRooms.fxml";
-        }
-    },
+			return "/fxml/ViewRooms.fxml";
+		}
+	},
 	ADDCARD {
-        @Override
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("addcard.title");
-        }
+			return getStringFromResourceBundle("addcard.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/AddCard.fxml";
-        }
-    },
+			return "/fxml/AddCard.fxml";
+		}
+	},
 	REMOVECARD {
-        @Override
+		@Override
 		public String getTitle() {
-            return getStringFromResourceBundle("removecard.title");
-        }
+			return getStringFromResourceBundle("removecard.title");
+		}
 
-        @Override
+		@Override
 		public String getFxmlFile() {
-            return "/fxml/RemoveCard.fxml";
-        }
-    };
-    
-    public abstract String getTitle();
-    public abstract String getFxmlFile();
-    
-    String getStringFromResourceBundle(String key){
-        return ResourceBundle.getBundle("Bundle").getString(key);
-    }
+			return "/fxml/RemoveCard.fxml";
+		}
+	},
+	ADMIN_HOME {
+		@Override
+		public String getTitle() {
+			return "Admin - My Hotel";
+		}
+
+		@Override
+		public String getFxmlFile() {
+			return "/fxml/admin/home.fxml";
+		}
+	};
+
+	public abstract String getTitle();
+
+	public abstract String getFxmlFile();
+
+	String getStringFromResourceBundle(String key) {
+		return ResourceBundle.getBundle("Bundle").getString(key);
+	}
 
 }

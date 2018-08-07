@@ -43,8 +43,6 @@ public class ApplicationController {
     	stageManager.switchScene(FxmlView.LOGIN);
 	}
 	
-
-	
 	
 	public String getStringFromResourceBundle(String key){
         return ResourceBundle.getBundle("Bundle").getString(key);
