@@ -29,6 +29,8 @@ import com.myhotel.domain.booking.ServiceDirector;
 import com.myhotel.patterns.FactoryMethod.ConcretePromotionFactory;
 import com.myhotel.patterns.FactoryMethod.HolidayPromotion;
 import com.myhotel.patterns.FactoryMethod.PromotionFactory;
+import com.myhotel.patterns.Iterator.Iterator;
+import com.myhotel.patterns.Iterator.RoomRepository;
 import com.myhotel.repository.HotelUserRepository;
 import com.myhotel.repository.UserRepository;
 import com.myhotel.service.ApplicationContextHolder;
@@ -72,10 +74,19 @@ public class ViewRoomController extends ApplicationController implements Initial
 	private Button btnLogout;
 	@FXML
 	private Label userMess;
+	
+	@FXML
+	private Button btnPrev;
+	@FXML
+	private Button btnNext;
 
 	private ObservableList<Room> roomListObservable = FXCollections.observableArrayList();
 	private String searchKeyword;
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
+
+	private RoomRepository roomRepo = new RoomRepository();
+	private Iterator iterator;
+	private int currentIndex = 0;
 
 	@FXML
     private void exit(ActionEvent event) {
@@ -123,6 +134,40 @@ public class ViewRoomController extends ApplicationController implements Initial
 		// Go to booking layout
 		goToBookingLayout(serviceDirector);
 	}
+	
+	@FXML
+    private void moveNext(ActionEvent event) {
+
+		System.out.println("move Next button pressed");
+		
+		if(iterator.hasNext()) {
+			
+			iterator.next();
+			
+			currentIndex++;
+			
+			roomTableView.getSelectionModel().clearSelection();
+			roomTableView.getSelectionModel().select(currentIndex);
+			roomTableView.getFocusModel().focus(currentIndex);
+		}		
+	}
+	
+	@FXML
+    private void movePrev(ActionEvent event) {
+
+		System.out.println("move Prev button pressed");
+		
+		if(iterator.hasPrev()) {
+			
+			iterator.previous();
+			
+			currentIndex--;
+			
+			roomTableView.getSelectionModel().clearSelection();
+			roomTableView.getSelectionModel().select(currentIndex);
+			roomTableView.getFocusModel().focus(currentIndex);
+		}
+	}
 
 	public void loadRoomTable(boolean withKeyword){
 		List<Room> rooms=null;
@@ -134,12 +179,20 @@ public class ViewRoomController extends ApplicationController implements Initial
 		}else {
 			rooms = roomService.findAvailableRoom();
 		}
+		
+		iterator = roomRepo.getIterator(this.searchKeyword);
+		currentIndex = 0;
+		
 		roomListObservable.clear();
 		roomListObservable.addAll(rooms);
 		roomTableView.setItems(roomListObservable);
 
 		loadStartDateEndDate();
 		loadPromotion();
+		
+		roomTableView.requestFocus();
+		roomTableView.getSelectionModel().select(currentIndex);
+		roomTableView.getFocusModel().focus(currentIndex);
 	}
 
 	public void loadPromotion(){
