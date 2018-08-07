@@ -220,7 +220,7 @@ public class SampleDataService {
 		if (bookingRepository.findAll().size() == 0) {
 			List<Payment> paymentList = paymentRepository.findAll();
 			for (int i = 0; i < SampleData.ROW_COUNT; i++) {
-				Date startDate = SampleData.randomDate();
+				Date startDate = SampleData.randomDate(8);
 				Date endDate = SampleData.nextDate(startDate);
 				Payment payment = null;
 				if (!paymentList.isEmpty()) {

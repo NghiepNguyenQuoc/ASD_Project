@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -35,7 +36,7 @@ public class HomeController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		menusController.setParentController(this);
 		try {
-			AnchorPane overview = FXMLLoader.load(getClass().getResource("/fxml/admin/overview.fxml"));
+			Node overview = FXMLLoader.load(getClass().getResource("/fxml/admin/overview.fxml"));
 			rootPane.setCenter(overview);
 		} catch (IOException ex) {
 			ex.printStackTrace();

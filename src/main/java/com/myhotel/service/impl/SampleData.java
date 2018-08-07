@@ -100,6 +100,12 @@ public class SampleData {
 		calendar.set(2018, months[random(months.length)] - 1, dates[random(dates.length)]);
 		return calendar.getTime();
 	}
+	
+	public static Date randomDate(int maxMonth) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2018, months[random(months.length)] % maxMonth, dates[random(dates.length)]);
+		return calendar.getTime();
+	}
 
 	public static Date nextDate(Date input) {
 		Calendar calendar = Calendar.getInstance();
