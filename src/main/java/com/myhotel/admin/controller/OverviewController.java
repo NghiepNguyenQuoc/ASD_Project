@@ -42,5 +42,13 @@ public class OverviewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Overview");
+		
+//		get booking list
+		
+//		weekly revenue (based on end date)
+//		create chart by sending to ChartAdapter
+//		add chart to GUI
+		
+		
 	}
 }
