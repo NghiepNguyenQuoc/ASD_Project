@@ -8,3 +8,6 @@
     -fx-stroke-type: INSIDE;
 }
 
+.btnGreen {
+	-fx-text-fill: #0000ff
+}

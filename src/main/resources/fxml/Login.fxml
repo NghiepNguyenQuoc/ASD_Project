@@ -12,7 +12,7 @@
 
 <AnchorPane stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.controller.LoginController">
    <children>
-      <Rectangle styleClass="my-rect" height="250.0" width="400.0" />
+      <Rectangle styleClass="my-rect" height="250.0" width="450.0" />
       <Label fx:id="lblLogin" layoutX="97.0" layoutY="46.0" text="Login" textFill="WHITE">
          <font>
             <Font size="20.0" />

@@ -20,9 +20,13 @@ import com.myhotel.logging.ChainPatternLogging;
 import com.myhotel.patterns.COR.AbstractLogger;
 import com.myhotel.patterns.FactoryMethod.PromotionName;
 import com.myhotel.patterns.Mediator.ConcreteHotelCustomer;
+import com.myhotel.patterns.Mediator.ConcreteLoginCustomer;
 import com.myhotel.patterns.Mediator.HotelCustomer;
+import com.myhotel.patterns.Mediator.LoginCustomer;
 import com.myhotel.patterns.Mediator.PromotionMediator;
 import com.myhotel.patterns.Mediator.PromotionMediatorImpl;
+import com.myhotel.patterns.Mediator.ValidationMediator;
+import com.myhotel.patterns.Mediator.ValidationMediatorImpl;
 import com.myhotel.repository.HotelUserRepository;
 import com.myhotel.service.ApplicationContextHolder;
 import com.myhotel.service.HotelUserService;
@@ -70,6 +74,19 @@ public class LoginController implements Initializable {
 	@FXML
 	private void loginAction(ActionEvent event) throws IOException {
 		try {
+			
+			HotelUser checkingUser = new HotelUser();
+			checkingUser.setEmail(getUsername());
+			checkingUser.setPassword(getPassword());
+			
+			LoginCustomer loginCustomer = new ConcreteLoginCustomer(validationMediator, checkingUser);
+			
+			if(!validationMediator.isValidHotelCustomer(loginCustomer)) {
+				lblLogin.setText("User Name or Password are not correct.");
+				loggerChain.logMessage(AbstractLogger.INFO, "User Name or Password are not correct.");
+				return;
+			}
+			
 			if (hotelUserService.authenticate(getUsername(), getPassword())) {
 				HotelUser user = hotelUserService.findByEmail(getUsername());
 				if (user.getUserType() == UserType.Admin) {
@@ -112,6 +129,7 @@ public class LoginController implements Initializable {
 		sampleMethod();
 
 		loggerChain = ChainPatternLogging.getChainOfLoggers();
+		setupValidationMediator();
 	}
 
 	List<HotelUser> hotelUsers;
@@ -119,6 +137,9 @@ public class LoginController implements Initializable {
 	HotelCustomer currentHotelCustomer;
 	boolean didSetUpMediator = false;
 	AbstractLogger loggerChain;
+	
+	HotelUser loginUser;
+	ValidationMediator validationMediator;
 
 	public void sampleMethod() {
 		sampleDataService.generateSampleData();
@@ -137,10 +158,9 @@ public class LoginController implements Initializable {
 			promotionMediator.addHotelCustomer(hotelCustomer);
 		}
 	}
-
-//	@Scheduled(cron="0/2 * * * * *")
-	public void printHello() {
-		System.out.println("Hello World");
+	
+	public void setupValidationMediator() {		
+		validationMediator = new ValidationMediatorImpl();
 	}
 
 	@Scheduled(cron = "0/45 * * * * *")
