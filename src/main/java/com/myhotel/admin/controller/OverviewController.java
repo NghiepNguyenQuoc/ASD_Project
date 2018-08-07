@@ -1,46 +1,47 @@
 package com.myhotel.admin.controller;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import org.springframework.stereotype.Controller;
 
-import com.myhotel.controller.ApplicationController;
-import com.myhotel.domain.Card;
-import com.myhotel.domain.HotelUser;
-import com.myhotel.domain.Promotion;
-import com.myhotel.domain.Room;
-import com.myhotel.domain.alert.HotelAlert;
-import com.myhotel.domain.booking.ConcreteServiceBuilder;
-import com.myhotel.domain.booking.ServiceDirector;
-import com.myhotel.domain.bookingprices.ServiceElementDoVisitor;
-import com.myhotel.repository.HotelUserRepository;
+import com.myhotel.domain.Booking;
 import com.myhotel.service.ApplicationContextHolder;
+import com.myhotel.service.BookingService;
+import com.myhotel.service.impl.BookingServiceImpl;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.chart.LineChart;
+import javafx.scene.layout.AnchorPane;
 
+/**
+ * 
+ * @author Cong Khanh Tran - trancongkhanh@gmail.com
+ *
+ *
+ */
 @Controller
 public class OverviewController implements Initializable {
-
+	@FXML
+	private AnchorPane anchorPane;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Overview");
+//		get booking list
+		List<Booking> bookingList = loadBookings();
+//		create chart by sending to ChartAdapter
+		ChartAdapter chartAdapter = new ChartAdapterImpl();
+		LineChart lineChart = chartAdapter.createChart(bookingList);
+//		add chart to GUI
+		anchorPane.getChildren().add(lineChart);
+	}
+
+	private List<Booking> loadBookings() {
+		List<Booking> bookings = null;
+		BookingService bookingService = ApplicationContextHolder.getContext().getBean(BookingServiceImpl.class);
+		bookings = bookingService.findAll();
+		return bookings;
 	}
 }

@@ -7,6 +7,7 @@
 
 <BorderPane fx:id="rootPane" maxHeight="-Infinity"
 	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="600.0" prefWidth="1000.0"
 	xmlns="http://javafx.com/javafx/8"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="com.myhotel.admin.controller.HomeController">

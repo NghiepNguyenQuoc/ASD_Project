@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -33,9 +34,9 @@ public class MenusController {
 
 	private void loadView(String viewFile) {
 		BorderPane rootPane = parentController.getRootPane();
-		URL overviewUrl = getClass().getResource(viewFile);
+		URL viewUrl = getClass().getResource(viewFile);
 		try {
-			AnchorPane content = FXMLLoader.load(overviewUrl);
+			Node content = FXMLLoader.load(viewUrl);
 			rootPane.setCenter(content);
 		} catch (IOException e) {
 			e.printStackTrace();
