@@ -3,7 +3,14 @@ package com.myhotel.admin.controller;
 import java.io.IOException;
 import java.net.URL;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
+
+import com.myhotel.config.StageManager;
+import com.myhotel.service.ApplicationContextHolder;
+import com.myhotel.view.FxmlView;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +22,16 @@ import javafx.scene.layout.BorderPane;
 public class MenusController {
 
 	private HomeController parentController;
+	
+	@Lazy
+    @Autowired
+    public StageManager stageManager;
+	public void logout() {
+		if (stageManager == null){
+			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
+		}
+    	stageManager.switchScene(FxmlView.LOGIN);
+	}
 
 	public HomeController getParentController() {
 		return parentController;
