@@ -248,6 +248,7 @@ public class ViewRoomController extends ApplicationController implements Initial
 
     public void setSelectedRooms(List<Room> selectedRooms) {
         this.selectedRooms = selectedRooms;
+        System.out.println("Set Selected Rooms.........");
     }
 
     public void addSelectionListener(){

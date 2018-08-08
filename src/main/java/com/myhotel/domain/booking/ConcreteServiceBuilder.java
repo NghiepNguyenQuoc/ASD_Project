@@ -11,6 +11,7 @@ import com.myhotel.domain.Room;
 import com.myhotel.service.ApplicationContextHolder;
 import com.myhotel.service.BookingService;
 import com.myhotel.service.HotelUserService;
+import com.myhotel.service.RoomService;
 
 import javax.transaction.Transactional;
 
@@ -25,6 +26,8 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 
 	@Autowired
 	BookingService bookingService;
+	@Autowired
+	RoomService roomService;
 
 	public ConcreteServiceBuilder(HotelUser user) {
 		super();
@@ -73,5 +76,30 @@ public class ConcreteServiceBuilder implements ServiceBuilder {
 	public List<Booking> getBookings(String startDate, String endDate){
 		
 		return null;
+	}
+	
+	public void checkInBooking(List<Booking> lstBookings) {
+		bookingService = ApplicationContextHolder.getContext().getBean(BookingService.class);
+		for(Booking b : lstBookings) {
+			b.setCheckInStatus(true);
+			bookingService.save(b);
+		}
+		
+	}
+	public void checkOutBooking(List<Booking> lstBookings) {
+		bookingService = ApplicationContextHolder.getContext().getBean(BookingService.class);
+		roomService = ApplicationContextHolder.getContext().getBean(RoomService.class);
+		for(Booking b : lstBookings) {
+			b.setCheckOutStatus(true);
+			bookingService.save(b);
+			
+			List<Room> bookedRooms = b.getRooms();
+			for(Room r : bookedRooms) {
+				System.out.println("Returning room: " + r.getRoomNumber());
+				r.setRoomVailable(true);
+				roomService.update(r);
+			}
+		}
+		
 	}
 }

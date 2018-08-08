@@ -1,6 +1,5 @@
 package com.myhotel.domain.booking;
 
-import java.util.Date;
 import java.util.List;
 
 import com.myhotel.domain.Booking;
@@ -11,5 +10,6 @@ public interface ServiceBuilder {
 	public void setRoomsToBooking(List<Room> lstRoom);
 	public void saveBooking();
 	
-	public List<Booking> getBookings(String startDate, String endDate);
+	public void checkInBooking(List<Booking> lstBookings);
+	public void checkOutBooking(List<Booking> lstBookings);
 }

@@ -3,6 +3,7 @@ package com.myhotel.domain.booking;
 import java.util.Date;
 import java.util.List;
 
+import com.myhotel.domain.Booking;
 import com.myhotel.domain.Room;
 
 public class ServiceDirector {
@@ -31,5 +32,12 @@ public class ServiceDirector {
 	
 	public void saveBooking() {
 		this.serviceBuilder.saveBooking();
+	}
+	
+	public void checkInBooking(List<Booking> lstBookings) {
+		this.serviceBuilder.checkInBooking(lstBookings);
+	}
+	public void checkOutBooking(List<Booking> lstBookings) {
+		this.serviceBuilder.checkOutBooking(lstBookings);
 	}
 }
