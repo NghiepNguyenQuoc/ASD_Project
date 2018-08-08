@@ -12,6 +12,7 @@ import com.myhotel.service.BookingService;
 import com.myhotel.service.RoomService;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -57,15 +58,16 @@ public class RoomServiceImpl implements RoomService {
     }
 
     public List<Room> findAvailableRoom(){
-//        List<Booking> bookings = bookingRepository.findAll();
-//        for (Booking b: bookings){
-//            List<Room> rooms = b.getRooms();
-//            for (Room r: rooms){
-//                r.setRoomVailable(false);
-//                roomRepository.save(r);
-//
-//            }
-//        }
+        List<Booking> bookings = bookingRepository.findAll();
+        bookings.removeIf(b -> (b.getCheckOutStatus()==null? false : b.getCheckOutStatus())==true);
+        for (Booking b: bookings){
+            List<Room> rooms = b.getRooms();
+            for (Room r: rooms){
+                r.setRoomVailable(false);
+                roomRepository.save(r);
+
+            }
+        }
         return roomRepository.findAllByStatus(true);
     }
 
