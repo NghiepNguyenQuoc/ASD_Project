@@ -12,36 +12,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 @Controller
-public class MenusController {
-
-	private HomeController parentController;
-
-	public HomeController getParentController() {
-		return parentController;
-	}
-
-	public void setParentController(HomeController parentController) {
-		this.parentController = parentController;
-	}
-
+public class MenusController extends ChildController {
 	/**
 	 * Event handler for MenuItem oveview
 	 */
 	@FXML
 	void overview(ActionEvent event) {
 		loadView(ViewsFiles.ADMIN_OVERVIEW);
-	}
-
-	private void loadView(String viewFile) {
-		BorderPane rootPane = parentController.getRootPane();
-		URL viewUrl = getClass().getResource(viewFile);
-		try {
-			Node content = FXMLLoader.load(viewUrl);
-			rootPane.setCenter(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	@FXML

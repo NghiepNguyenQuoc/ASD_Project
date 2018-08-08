@@ -184,25 +184,25 @@ public class SampleDataService {
 
 	public void addSampleRoom() {
 		if (roomRepository.findAll().size() == 0) {
-			addRoom(101, "Grand", 7.6f, 300, 2, 2, true, RoomType.Deluxe);
-			addRoom(102, "GrandQueen", 7f, 350, 2, 2, true, RoomType.Standard);
-			addRoom(103, "GrandWest", 7.1f, 310, 2, 2, true, RoomType.Suite);
-			addRoom(104, "GrandBeach", 7.2f, 320, 2, 2, true, RoomType.Deluxe);
-			addRoom(105, "GrandHill", 7.3f, 280, 2, 2, true, RoomType.Suite);
-			addRoom(201, "Grand", 7.6f, 300, 2, 2, true, RoomType.Deluxe);
-			addRoom(202, "GrandQueen", 7f, 350, 2, 2, true, RoomType.Standard);
-			addRoom(203, "GrandWest", 7.1f, 310, 2, 2, true, RoomType.Suite);
-			addRoom(204, "GrandBeach", 7.2f, 320, 2, 2, true, RoomType.Deluxe);
-			addRoom(205, "GrandHill", 7.3f, 280, 2, 2, true, RoomType.Suite);
-			addRoom(301, "Grand", 7.6f, 300, 2, 2, true, RoomType.Deluxe);
-			addRoom(302, "GrandQueen", 7f, 350, 2, 2, true, RoomType.Standard);
-			addRoom(303, "GrandWest", 7.1f, 310, 2, 2, true, RoomType.Suite);
-			addRoom(304, "GrandBeach", 7.2f, 320, 2, 2, true, RoomType.Deluxe);
-			addRoom(305, "GrandHill", 7.3f, 280, 2, 2, true, RoomType.Suite);
+			addRoom(101, BedType.Double, 7.6f, 300, 2, 2, true, RoomType.Deluxe);
+			addRoom(102, BedType.Twin, 7f, 350, 2, 2, true, RoomType.Standard);
+			addRoom(103, BedType.Double, 7.1f, 310, 2, 2, true, RoomType.Suite);
+			addRoom(104, BedType.Single, 7.2f, 320, 2, 2, true, RoomType.Deluxe);
+			addRoom(105, BedType.Single, 7.3f, 280, 2, 2, true, RoomType.Suite);
+			addRoom(201, BedType.Double, 7.6f, 300, 2, 2, true, RoomType.Deluxe);
+			addRoom(202, BedType.Twin, 7f, 350, 2, 2, true, RoomType.Standard);
+			addRoom(203, BedType.Double, 7.1f, 310, 2, 2, true, RoomType.Suite);
+			addRoom(204, BedType.Double, 7.2f, 320, 2, 2, true, RoomType.Deluxe);
+			addRoom(205, BedType.Single, 7.3f, 280, 2, 2, true, RoomType.Suite);
+			addRoom(301, BedType.Double, 7.6f, 300, 2, 2, true, RoomType.Deluxe);
+			addRoom(302, BedType.Twin, 7f, 350, 2, 2, true, RoomType.Standard);
+			addRoom(303, BedType.Double, 7.1f, 310, 2, 2, true, RoomType.Suite);
+			addRoom(304, BedType.Double, 7.2f, 320, 2, 2, true, RoomType.Deluxe);
+			addRoom(305, BedType.Single, 7.3f, 280, 2, 2, true, RoomType.Suite);
 		}
 	}
 
-	public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult,
+	public void addRoom(int roomNumber, BedType bedType, float tax, int price, int numChildren, int numAdult,
 			boolean isVailable, RoomType roomType) {
 		Room room = new Room();
 		room.setRoomNumber(roomNumber);
@@ -280,7 +280,7 @@ public class SampleDataService {
 			address = new Address();
 			address.setCity("Fairfield");
 			address.setState("IOWA");
-			address.setStreet("5th Bủlington");
+			address.setStreet("5th Main Street");
 			address.setZipcode("52556");
 			addressRepository.save(address);
 			address = new Address();
