@@ -1,4 +1,4 @@
-package com.myhotel.admin.controller;
+package com.myhotel.admin.overview;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package com.myhotel.admin.controller;
+package com.myhotel.admin.overview;
 
-import java.util.List;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,7 +13,6 @@ import com.myhotel.domain.Booking;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
@@ -25,12 +24,14 @@ import javafx.util.StringConverter;
  *
  *
  */
-public class ChartAdapterImpl implements ChartAdapter {
+public class ChartBuilderImpl implements ChartBuilder {
+	@Override
+	public CategoryAxis buildXAxis() {
+		return new CategoryAxis();
+	}
 
 	@Override
-	public LineChart createChart(List<Booking> bookingList) {
-		CategoryAxis xAxis = new CategoryAxis();
-
+	public NumberAxis buildYAxis() {
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setTickLabelFormatter(new StringConverter<Number>() {
 			@Override
@@ -51,15 +52,11 @@ public class ChartAdapterImpl implements ChartAdapter {
 				}
 			}
 		});
-		LineChart lineChart = new LineChart(xAxis, yAxis);
-		lineChart.setData(getChartData(bookingList));
-		lineChart.setTitle("Monthly Revenue");
-		return lineChart;
+		return yAxis;
 	}
 
-	private ObservableList getChartData(List<Booking> bookingList) {
-		double aValue = 10;
-		double cValue = 20;
+	@Override
+	public ObservableList buildData(List<Booking> bookingList) {
 		ObservableList<XYChart.Series<String, Double>> answer = FXCollections.observableArrayList();
 		Series<String, Double> aSeries = new Series<String, Double>();
 		aSeries.setName("Revenue");
@@ -91,4 +88,5 @@ public class ChartAdapterImpl implements ChartAdapter {
 		}
 		return monthlyData;
 	}
+
 }
