@@ -1,6 +1,5 @@
 package com.myhotel.service.impl;
 
-import org.omg.PortableInterceptor.HOLDING;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,8 +42,8 @@ public class SampleDataService {
 
 	public void generateSampleData() {
 		addSampleAddress();
-		addSampleBooking();
 		addSamplePayment();
+		addSampleBooking();
 		addSampleCard();
 		addSamplePromotion();
 		addSampleUser();
@@ -95,12 +94,31 @@ public class SampleDataService {
 
 	public void addSamplePayment() {
 		if (paymentRepository.findAll().size() == 0) {
-			addPayment(500, "Credit");
-			addPayment(750, "Credit");
-			addPayment(1000, "Debit");
-			addPayment(1500, "Debit");
+			addPayment(50, "Credit");
+			addPayment(75, "Credit");
+			addPayment(100, "Debit");
+			addPayment(150, "Debit");
+			addPayment(30, "Credit");
+			addPayment(45, "Credit");
+			addPayment(65, "Debit");
+			addPayment(90, "Debit");
+			addPayment(50, "Credit");
+			addPayment(75, "Credit");
+			addPayment(100, "Debit");
+			addPayment(150, "Debit");
+			addPayment(30, "Credit");
+			addPayment(45, "Credit");
+			addPayment(65, "Debit");
+			addPayment(90, "Debit");
+			addPayment(50, "Credit");
+			addPayment(75, "Credit");
+			addPayment(100, "Debit");
+			addPayment(150, "Debit");
+			addPayment(30, "Credit");
+			addPayment(45, "Credit");
+			addPayment(65, "Debit");
+			addPayment(90, "Debit");
 		}
-
 	}
 
 	public void addPayment(float amount, String type) {
@@ -112,10 +130,10 @@ public class SampleDataService {
 
 	public void addSampleCard() {
 		if (cardRepository.findAll().size() == 0) {
-			addCard("900876574434", new Date(), "Nguyen Van Anh", "832", "07-2020");
-			addCard("900876574435", new Date(), "Nguyen Tuan Dung", "116", "05-2020");
-			addCard("900876574436", new Date(), "Nguyen Jone", "332", "07-2021");
-			addCard("900876574437", new Date(), "Tran Tien", "567", "12-2020");
+			addCard("900876574434", new Date(), "John Doe", "832", "07-2020");
+			addCard("900876574435", new Date(), "John Doe", "116", "05-2020");
+			addCard("900876574436", new Date(), "John Doe", "332", "07-2021");
+			addCard("900876574437", new Date(), "John Doe", "567", "12-2020");
 		}
 	}
 
@@ -132,14 +150,14 @@ public class SampleDataService {
 
 	public void addCardToPayment() {
 		List<Payment> payments = paymentRepository.findAll();
-		if (payments.get(0).getCards().size() == 0) {
-			List<Card> cards = cardRepository.findAll();
-			for (int i = 0; i < payments.size(); i++) {
-				Payment payment = payments.get(i);
-				payment.getCards().add(cards.get(i));
-				paymentRepository.save(payment);
-			}
-		}
+//		if (payments.get(0).getCards().size() == 0) {
+//			List<Card> cards = cardRepository.findAll();
+//			for (int i = 0; i < payments.size(); i++) {
+//				Payment payment = payments.get(i);
+//				payment.getCards().add(cards.get(SampleData.random(cards.size())));
+//				paymentRepository.save(payment);
+//			}
+//		}
 	}
 
 	public void addSampleUser() {
@@ -200,21 +218,28 @@ public class SampleDataService {
 
 	public void addSampleBooking() {
 		if (bookingRepository.findAll().size() == 0) {
-			addBooking("123", true, false, new Date(), new Date());
-			addBooking("124", true, false, new Date(), new Date());
-			addBooking("125", true, false, new Date(), new Date());
-			addBooking("126", true, false, new Date(), new Date());
+			List<Payment> paymentList = paymentRepository.findAll();
+			for (int i = 0; i < SampleData.ROW_COUNT; i++) {
+				Date startDate = SampleData.randomDate(8);
+				Date endDate = SampleData.nextDate(startDate);
+				Payment payment = null;
+				if (!paymentList.isEmpty()) {
+					payment = paymentList.get(SampleData.random(paymentList.size()));
+				}
+				addBooking("B" + i, true, false, startDate, endDate, payment);
+			}
 		}
 	}
 
 	public void addBooking(String bookingNumber, boolean checkInStatus, boolean checkOutStatus, Date endDate,
-			Date startDate) {
+			Date startDate, Payment payment) {
 		Booking booking = new Booking(startDate, endDate);
 		booking.setBookingNumber(bookingNumber);
 		booking.setCheckInStatus(checkInStatus);
 		booking.setCheckOutStatus(checkOutStatus);
 		booking.setStartDate(startDate);
 		booking.setEndDate(endDate);
+		booking.setPayment(payment);
 		bookingRepository.save(booking);
 	}
 
