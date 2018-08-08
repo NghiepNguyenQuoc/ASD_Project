@@ -22,28 +22,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.controller.ViewRoomController">
-   <top>
-      <MenuBar BorderPane.alignment="TOP_LEFT">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#showCheckIn" text="Check In" />
-                  <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Profile">
-          	<items>
-              <MenuItem mnemonicParsing="false" onAction="#showUserInfo" text="User info" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <left>
       <VBox prefHeight="573.0" prefWidth="281.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -185,6 +163,18 @@
                         <Insets right="30.0" top="10.0" />
                      </HBox.margin>
                   </Label>
+                  <Button fx:id="btnUserProfile" layoutX="200.0" layoutY="194.0" mnemonicParsing="false" 
+                  	onAction="#showUserInfo" prefHeight="30.0" prefWidth="86.0" styleClass="btnGreen" text="Profile" textFill="WHITE">
+			         <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#00000091" />
+                     </effect>
+			      </Button>
                   <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#logout" prefHeight="22.0" prefWidth="70.0" styleClass="background" text="Logout" textFill="#fff9f9" textOverrun="CLIP">
                      <font>
                         <Font size="14.0" />
