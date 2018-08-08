@@ -2,6 +2,7 @@ package com.myhotel.admin.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -14,51 +15,22 @@ import com.myhotel.view.FxmlView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 @Controller
-public class MenusController {
-
-	private HomeController parentController;
+public class MenusController extends ChildController {
 	
-	@Lazy
-    @Autowired
-    public StageManager stageManager;
-	public void logout() {
-		if (stageManager == null){
-			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
-		}
-    	stageManager.switchScene(FxmlView.LOGIN);
-	}
-
-	public HomeController getParentController() {
-		return parentController;
-	}
-
-	public void setParentController(HomeController parentController) {
-		this.parentController = parentController;
-	}
-
+	private StageManager stageManager;
+	
 	/**
 	 * Event handler for MenuItem oveview
 	 */
 	@FXML
 	void overview(ActionEvent event) {
 		loadView(ViewsFiles.ADMIN_OVERVIEW);
-	}
-
-	private void loadView(String viewFile) {
-		BorderPane rootPane = parentController.getRootPane();
-		URL viewUrl = getClass().getResource(viewFile);
-		try {
-			Node content = FXMLLoader.load(viewUrl);
-			rootPane.setCenter(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	@FXML
@@ -80,5 +52,12 @@ public class MenusController {
 	@FXML
 	void users(ActionEvent event) {
 		loadView(ViewsFiles.ADMIN_USERS);
+	}
+	
+	public void logout() {
+		if (stageManager == null){
+			stageManager = ApplicationContextHolder.getContext().getBean(StageManager.class);
+		}
+    	stageManager.switchScene(FxmlView.LOGIN);
 	}
 }
