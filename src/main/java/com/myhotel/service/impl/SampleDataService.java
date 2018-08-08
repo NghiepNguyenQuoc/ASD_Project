@@ -164,14 +164,14 @@ public class SampleDataService {
 
 	public void addSampleUser() {
 		if (hotelUserRepository.findAll().size() == 0) {
-			addUser("1111111111111111", "admin@myhotel.com", "Admin", "Admin", Gender.Male, "admin", "541123456",
+			addUser("admin@myhotel.com", "Admin", "Admin", Gender.Male, "admin", "541123456",
 					UserType.Admin);
-			addUser("1111111111111111", "customer@gmail.com", "Customer", "Customer", Gender.Male, "customer",
+			addUser("customer@gmail.com", "Customer", "Customer", Gender.Male, "customer",
 					"541123457", UserType.Customer);
 		}
 	}
 
-	public void addUser(String credit, String email, String firstName, String lastName, Gender gender, String password,
+	public void addUser(String email, String firstName, String lastName, Gender gender, String password,
 			String phone, UserType userType) {
 		HotelUser hotelUser = new HotelUser();
 		hotelUser.setEmail(email);

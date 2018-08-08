@@ -23,7 +23,7 @@ public class Booking {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
     
-    @OneToMany(fetch = FetchType.EAGER)    
+    @OneToMany (fetch = FetchType.EAGER)    
     @IndexColumn(name="id")
     private List<Room> rooms = new ArrayList<Room>();
     

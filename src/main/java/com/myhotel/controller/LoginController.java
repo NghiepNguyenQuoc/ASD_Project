@@ -172,7 +172,6 @@ public class LoginController implements Initializable {
 				System.out.println("did setup Mediator");
 			}
 			currentHotelCustomer.sendPromotion(PromotionName.SpringHoliday.toString());
-//			promotionMediator.broadCastPromotion(PromotionName.SpringHoliday.toString(),currentHotelCustomer);
 			System.out.println("BroadCast holiday promotion");
 		}
 	}
