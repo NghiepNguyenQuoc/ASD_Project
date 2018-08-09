@@ -22,9 +22,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="371.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.admin.controller.CheckInController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.admin.controller.CheckInController">
 	<children>
-		<TableView fx:id="bookingTableView" layoutX="-79.0" layoutY="-67.0" prefHeight="441.0" prefWidth="881.0" tableMenuButtonVisible="true">
+		<TableView fx:id="bookingTableView" layoutX="-79.0" layoutY="-46.0" prefHeight="420.0" prefWidth="881.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="colBookingNumber" maxWidth="4000.0" prefWidth="143.0" text="Booking Number" />
                 <TableColumn fx:id="colStartDate" maxWidth="4000.0" prefWidth="33.0" text="Start Date" />
@@ -40,7 +40,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-	<Button fx:id="checkIn" alignment="CENTER" contentDisplay="CENTER" layoutX="-79.0" layoutY="-110.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="20.0" prefWidth="75.0" styleClass="btnGreen" text="Check In" textFill="WHITE">
+	<Button fx:id="checkIn" alignment="CENTER" contentDisplay="CENTER" layoutX="-79.0" layoutY="-86.0" mnemonicParsing="false" onAction="#checkIn" prefHeight="20.0" prefWidth="75.0" styleClass="btnGreen" text="Check In" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -48,7 +48,7 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
                      </effect>
                   </Button>
-      <Button fx:id="checkOut" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="-110.0" mnemonicParsing="false" onAction="#checkOut" prefHeight="30.0" prefWidth="89.0" styleClass="btnGreen" text="Check Out" textFill="WHITE">
+      <Button fx:id="checkOut" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="-86.0" mnemonicParsing="false" onAction="#checkOut" prefHeight="30.0" prefWidth="89.0" styleClass="btnGreen" text="Check Out" textFill="WHITE">
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
          </effect>

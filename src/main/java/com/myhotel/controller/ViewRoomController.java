@@ -213,7 +213,6 @@ public class ViewRoomController extends ApplicationController implements Initial
 		Date dt = getDaysFromNow(1);
 		startDate.setText(dateFormat.format(getDaysFromNow(1)));
 		endDate.setText(dateFormat.format(getDaysFromNow(2)));
-//		System.out.println(dateFormat.format(dt));
 	}
 
 	public Date getDaysFromNow(int i){
@@ -248,13 +247,11 @@ public class ViewRoomController extends ApplicationController implements Initial
 
     public void setSelectedRooms(List<Room> selectedRooms) {
         this.selectedRooms = selectedRooms;
-        System.out.println("Set Selected Rooms.........");
     }
 
     public void addSelectionListener(){
         roomTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedRooms = roomTableView.getSelectionModel().getSelectedItems();
-//            System.out.println();
 			this.totalRoomsSelected.setText(selectedRooms.size()+"");
                 });
         searchBox.textProperty().addListener(this);

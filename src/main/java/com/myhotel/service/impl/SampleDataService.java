@@ -7,6 +7,10 @@ import com.myhotel.domain.*;
 import com.myhotel.repository.*;
 
 import javax.transaction.Transactional;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -43,18 +47,16 @@ public class SampleDataService {
 	public void generateSampleData() {
 		addSampleAddress();
 		addSamplePayment();
+		addSampleRoom();
 		addSampleBooking();
 		addSampleCard();
 		addSamplePromotion();
 		addSampleUser();
 		addSampleReceipt();
-		addSampleRoom();
 		addAddressToHotelUser();
 		addPaymentToHotelUser();
 		addCardToPayment();
-
 	}
-
 	public void addPaymentToHotelUser() {
 		List<HotelUser> hotelUsers = hotelUserRepository.findAll();
 		List<Payment> payments = paymentRepository.findAll();
@@ -184,25 +186,25 @@ public class SampleDataService {
 
 	public void addSampleRoom() {
 		if (roomRepository.findAll().size() == 0) {
-			addRoom(101, "Grand", 7.6f, 300, 2, 2, true, RoomType.Deluxe);
-			addRoom(102, "GrandQueen", 7f, 350, 2, 2, true, RoomType.Standard);
-			addRoom(103, "GrandWest", 7.1f, 310, 2, 2, true, RoomType.Suite);
-			addRoom(104, "GrandBeach", 7.2f, 320, 2, 2, true, RoomType.Deluxe);
-			addRoom(105, "GrandHill", 7.3f, 280, 2, 2, true, RoomType.Suite);
-			addRoom(201, "Grand", 7.6f, 300, 2, 2, true, RoomType.Deluxe);
-			addRoom(202, "GrandQueen", 7f, 350, 2, 2, true, RoomType.Standard);
-			addRoom(203, "GrandWest", 7.1f, 310, 2, 2, true, RoomType.Suite);
-			addRoom(204, "GrandBeach", 7.2f, 320, 2, 2, true, RoomType.Deluxe);
-			addRoom(205, "GrandHill", 7.3f, 280, 2, 2, true, RoomType.Suite);
-			addRoom(301, "Grand", 7.6f, 300, 2, 2, true, RoomType.Deluxe);
-			addRoom(302, "GrandQueen", 7f, 350, 2, 2, true, RoomType.Standard);
-			addRoom(303, "GrandWest", 7.1f, 310, 2, 2, true, RoomType.Suite);
-			addRoom(304, "GrandBeach", 7.2f, 320, 2, 2, true, RoomType.Deluxe);
-			addRoom(305, "GrandHill", 7.3f, 280, 2, 2, true, RoomType.Suite);
+			addRoom(101, BedType.Double, 7.6f, 300, 2, 2, true, RoomType.Deluxe);
+			addRoom(102, BedType.Twin, 7f, 350, 2, 2, true, RoomType.Standard);
+			addRoom(103, BedType.Double, 7.1f, 310, 2, 2, true, RoomType.Suite);
+			addRoom(104, BedType.Single, 7.2f, 320, 2, 2, true, RoomType.Deluxe);
+			addRoom(105, BedType.Single, 7.3f, 280, 2, 2, true, RoomType.Suite);
+			addRoom(201, BedType.Double, 7.6f, 300, 2, 2, true, RoomType.Deluxe);
+			addRoom(202, BedType.Twin, 7f, 350, 2, 2, true, RoomType.Standard);
+			addRoom(203, BedType.Double, 7.1f, 310, 2, 2, true, RoomType.Suite);
+			addRoom(204, BedType.Double, 7.2f, 320, 2, 2, true, RoomType.Deluxe);
+			addRoom(205, BedType.Single, 7.3f, 280, 2, 2, true, RoomType.Suite);
+			addRoom(301, BedType.Double, 7.6f, 300, 2, 2, true, RoomType.Deluxe);
+			addRoom(302, BedType.Twin, 7f, 350, 2, 2, true, RoomType.Standard);
+			addRoom(303, BedType.Double, 7.1f, 310, 2, 2, true, RoomType.Suite);
+			addRoom(304, BedType.Double, 7.2f, 320, 2, 2, true, RoomType.Deluxe);
+			addRoom(305, BedType.Single, 7.3f, 280, 2, 2, true, RoomType.Suite);
 		}
 	}
 
-	public void addRoom(int roomNumber, String bedType, float tax, int price, int numChildren, int numAdult,
+	public void addRoom(int roomNumber, BedType bedType, float tax, int price, int numChildren, int numAdult,
 			boolean isVailable, RoomType roomType) {
 		Room room = new Room();
 		room.setRoomNumber(roomNumber);
@@ -210,13 +212,15 @@ public class SampleDataService {
 		room.setPrice(price);
 		room.setNumberChildren(numChildren);
 		room.setNumberAdult(numAdult);
-		room.setBedType(bedType);
+		room.setBedType(bedType + "");
 		room.setRoomVailable(isVailable);
 		room.setRoomType(roomType);
 		roomRepository.save(room);
 	}
 
 	public void addSampleBooking() {
+		List<Room> rooms = roomRepository.findAll();
+		
 		if (bookingRepository.findAll().size() == 0) {
 			List<Payment> paymentList = paymentRepository.findAll();
 			for (int i = 0; i < SampleData.ROW_COUNT; i++) {
@@ -226,21 +230,34 @@ public class SampleDataService {
 				if (!paymentList.isEmpty()) {
 					payment = paymentList.get(SampleData.random(paymentList.size()));
 				}
-				addBooking("B" + i, true, false, startDate, endDate, payment);
+				Room room = null;
+				if (!rooms.isEmpty()) {
+					room = rooms.get(SampleData.random(rooms.size()));
+				}
+				addBooking("B" + i, true, false, startDate, endDate, payment, room);
 			}
 		}
 	}
 
 	public void addBooking(String bookingNumber, boolean checkInStatus, boolean checkOutStatus, Date endDate,
-			Date startDate, Payment payment) {
+			Date startDate, Payment payment, Room room) {
 		Booking booking = new Booking(startDate, endDate);
 		booking.setBookingNumber(bookingNumber);
 		booking.setCheckInStatus(checkInStatus);
 		booking.setCheckOutStatus(checkOutStatus);
+		
 		booking.setStartDate(startDate);
 		booking.setEndDate(endDate);
+		booking.setStartDate_S(format(startDate));
+		booking.setEndDate_S(format(endDate));
 		booking.setPayment(payment);
+//		booking.setRooms(Arrays.asList(room));
 		bookingRepository.save(booking);
+	}
+
+	private String format(Date date) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
+		return formatter.format(date);
 	}
 
 	public void addSamplePromotion() {
@@ -280,7 +297,7 @@ public class SampleDataService {
 			address = new Address();
 			address.setCity("Fairfield");
 			address.setState("IOWA");
-			address.setStreet("5th Bủlington");
+			address.setStreet("5th Main Street");
 			address.setZipcode("52556");
 			addressRepository.save(address);
 			address = new Address();

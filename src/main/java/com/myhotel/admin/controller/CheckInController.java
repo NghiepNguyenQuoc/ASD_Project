@@ -169,9 +169,10 @@ public class CheckInController extends ApplicationController implements Initiali
     private void checkOut(ActionEvent event) {
 		System.out.println("Check Out Process...");
 		for(Booking b : selectedBookings) {
-			List<Room> lstRooms = b.getRooms();
-			for (Room r : lstRooms) {
-				System.out.println(r.getRoomNumber());
+			if((b.getCheckInStatus()==null? false : b.getCheckInStatus())==false) {
+				HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("checkingout.warning"), 
+						AlertType.ERROR);
+				return;
 			}
 		}
 		
