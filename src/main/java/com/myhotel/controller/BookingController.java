@@ -35,50 +35,49 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
 @Controller
 public class BookingController extends ApplicationController implements Initializable {
 	private ServiceDirector serviceDirector;
-	
+
 	@FXML
 	private TextField name;
-	
+
 	@FXML
 	private Label userId;
-	
+
 	@FXML
 	private TextField address;
-	
+
 	@FXML
 	private ComboBox<String> cardNumber;
-	
+
 	@FXML
 	private Button addNewCard;
-	
+
 	@FXML
 	private TextField startDate;
-	
+
 	@FXML
 	private TextField endDate;
-	
+
 	@FXML
 	private Button cancel;
-	
+
 	@FXML
 	private Button pay;
-	
+
 	@FXML
 	private Button btnLogout;
-	
+
 	@FXML
 	private TableView<Room> roomsTable;
-	
+
 	@FXML
 	private TextField totalPrice;
-	
+
 	@FXML
 	private TextField discount;
-	
+
 	@FXML
 	private TableColumn<Room, Long> colRoomNumber;
 
@@ -90,62 +89,62 @@ public class BookingController extends ApplicationController implements Initiali
 
 	@FXML
 	private TableColumn<Room, String> colAdults;
-	
+
 	@FXML
-    private TableColumn<Room, String> colChildren;
+	private TableColumn<Room, String> colChildren;
 
 	@FXML
 	private TableColumn<Room, String> colRoomType;
-	
+
 	@FXML
-    private TableColumn<Room, String> colStatus;
-	
+	private TableColumn<Room, String> colStatus;
+
 	@FXML
 	private TableColumn<Room, String> colTax;
-	
+
 	@FXML
-    private MenuItem deleteRoom;
-	
+	private MenuItem deleteRoom;
+
 	@FXML
 	private Label userMess;
 
 	@FXML
-    private void exit(ActionEvent event) {
-		
+	private void exit(ActionEvent event) {
+
 	}
-	
+
 	@FXML
-    private void cancel(ActionEvent event) {
+	private void cancel(ActionEvent event) {
 		goToViewRoomLayout();
 	}
-	
+
 	@FXML
-    private void pay(ActionEvent event) {
+	private void pay(ActionEvent event) {
 		if (this.cardNumber.getValue() != null) {
 			this.serviceDirector.getServiceBuilder().saveBooking();
-			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("booking.completed"), 
+			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("booking.completed"),
 					AlertType.INFORMATION);
 			goToViewRoomLayout();
 		} else {
-			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), 
-							AlertType.WARNING);
+			HotelAlert.showAlert(ResourceBundle.getBundle("Bundle").getString("booking.warning"), AlertType.WARNING);
 		}
 	}
-	public int loadPromotion(){
+
+	public int loadPromotion() {
 		HotelUserRepository userRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
 
 		HotelUser hotelUser = userRepository.findOne(currentUser.getId());
 		List<Promotion> promotions = hotelUser.getPromotions();
 		int discountTotal = 0;
-		for (Promotion promotion: promotions){
+		for (Promotion promotion : promotions) {
 			discountTotal += promotion.getDiscount();
 		}
-		discount.setText(discountTotal+"");
+		discount.setText(discountTotal + "");
 		return discountTotal;
 	}
-	
+
 	@FXML
-    private void addNewCard(ActionEvent event) {
+	private void addNewCard(ActionEvent event) {
 		gotoAddCardLayout(this.serviceDirector);
 	}
 
@@ -160,28 +159,28 @@ public class BookingController extends ApplicationController implements Initiali
 
 	// Use for passing data from view book controller to booking controller
 	public void setServiceDirector(ServiceDirector serviceDirector) {
-		
+
 		// Using builder pattern to do booking action
 		this.serviceDirector = serviceDirector;
-		ConcreteServiceBuilder concreteServiceBuilder =
-						(ConcreteServiceBuilder)this.serviceDirector.getServiceBuilder();
-		
+		ConcreteServiceBuilder concreteServiceBuilder = (ConcreteServiceBuilder) this.serviceDirector
+				.getServiceBuilder();
+
 		// Show user information to GUI
-		this.name.setText(concreteServiceBuilder.getUser().getFirstName() + 
-				" " + concreteServiceBuilder.getUser().getLastName());
+		this.name.setText(
+				concreteServiceBuilder.getUser().getFirstName() + " " + concreteServiceBuilder.getUser().getLastName());
 		this.address.setText(concreteServiceBuilder.getUser().getAddress().toString());
-		
+
 		// Show list cards of user if have
 		List<String> numCard = new ArrayList<>();
 		for (Card c : concreteServiceBuilder.getUser().getPayment().getCards()) {
 			String cardNumber = c.getCardNumber();
 			numCard.add("xxxxxx" + cardNumber.substring(0, cardNumber.length() - 5));
 		}
-		
+
 		this.cardNumber.getItems().addAll(numCard);
 		this.startDate.setText(concreteServiceBuilder.getBooking().getStartDate_S());
 		this.endDate.setText(concreteServiceBuilder.getBooking().getEndDate_S());
-		
+
 		List<Room> lstRoom = concreteServiceBuilder.getBooking().getRooms();
 //		concreteServiceBuilder.getBooking().
 		Double discountPercent = 0.0;
@@ -192,7 +191,7 @@ public class BookingController extends ApplicationController implements Initiali
 			discountPercent = 0.3;
 		}
 		this.discount.setText(String.valueOf(discountPercent));
-		
+
 		// Count total price using visitor pattern
 		ServiceElementDoVisitor serviceElementVisitor = new ServiceElementDoVisitor();
 		for (Room r : lstRoom) {
@@ -202,11 +201,10 @@ public class BookingController extends ApplicationController implements Initiali
 		if (discountPercent > 0) {
 			finalPrice = finalPrice - (finalPrice * discountPercent);
 		}
-		finalPrice = finalPrice - (finalPrice * (float)loadPromotion()/100);
+		finalPrice = finalPrice - (finalPrice * (float) loadPromotion() / 100);
 
-		this.totalPrice.setText(String.valueOf(finalPrice));
-		
-		
+		this.totalPrice.setText(String.valueOf(Math.ceil(finalPrice)));
+
 		// Load list room to table view
 		ObservableList<Room> data = FXCollections.observableArrayList(lstRoom);
 		colRoomNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
@@ -216,27 +214,24 @@ public class BookingController extends ApplicationController implements Initiali
 		colChildren.setCellValueFactory(new PropertyValueFactory<>("numberChildren"));
 		colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
 		colStatus.setCellValueFactory(cellData -> {
-            boolean roomVailable = cellData.getValue().isRoomVailable();
-            String availableAsString;
-            if(roomVailable == true)
-            {
-                availableAsString = "Available";
-            }
-            else
-            {
-                availableAsString = "Occupated";
-            }
+			boolean roomVailable = cellData.getValue().isRoomVailable();
+			String availableAsString;
+			if (roomVailable == true) {
+				availableAsString = "Available";
+			} else {
+				availableAsString = "Occupated";
+			}
 
-            return new ReadOnlyStringWrapper(availableAsString);
-        });
+			return new ReadOnlyStringWrapper(availableAsString);
+		});
 		colTax.setCellValueFactory(new PropertyValueFactory<>("tax"));
-		
+
 		data.clear();
 		data.addAll(lstRoom);
 		roomsTable.setItems(data);
-		
+
 	}
-	
+
 	public ServiceDirector getServiceDirector() {
 		return this.serviceDirector;
 	}
