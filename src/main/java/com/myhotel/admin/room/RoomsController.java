@@ -1,4 +1,4 @@
-package com.myhotel.admin.controller;
+package com.myhotel.admin.room;
 
 import java.net.URL;
 import java.text.DateFormat;
@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.myhotel.admin.controller.ChildController;
+import com.myhotel.admin.controller.ViewsFiles;
 import com.myhotel.domain.Room;
 import com.myhotel.service.ApplicationContextHolder;
 import com.myhotel.service.impl.RoomServiceImpl;
@@ -16,6 +18,7 @@ import com.myhotel.service.impl.RoomServiceImpl;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
 /**
  * 
@@ -32,7 +36,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  *
  */
 @Controller
-public class RoomsController implements Initializable {
+public class RoomsController extends ChildController implements Initializable {
 
 	public TableColumn<Room, String> colAdults;
 	public TableColumn<Room, String> colChildren;
@@ -64,6 +68,9 @@ public class RoomsController implements Initializable {
 	private Button btnLogout;
 	@FXML
 	private Label userMess;
+	
+	@FXML
+	private Button newRoomBtn;
 
 	private ObservableList<Room> roomListObservable = FXCollections.observableArrayList();
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
@@ -72,6 +79,8 @@ public class RoomsController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		setColumnProperties();
 		loadRooms();
+		
+		System.out.println("parentController:" + getParentController());
 	}
 
 	private void setColumnProperties() {
@@ -107,5 +116,10 @@ public class RoomsController implements Initializable {
 		roomListObservable.addAll(rooms);
 		roomTableView.setItems(roomListObservable);
 
+	}
+	
+	@FXML
+	public void onNewRoom() {
+		loadView(ViewsFiles.ADMIN_NEW_ROOM);
 	}
 }

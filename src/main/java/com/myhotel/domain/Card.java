@@ -18,7 +18,7 @@ public class Card {
     private Date expiredDate;
     private String expiredDateS;
 
-    public String getHoldername() {
+	public String getHoldername() {
         return holdername;
     }
 
