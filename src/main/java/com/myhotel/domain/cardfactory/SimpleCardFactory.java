@@ -20,10 +20,12 @@ public class SimpleCardFactory implements CardFactory {
 				card = new Card();
 				break;
 			case "Debit":
-				card = new DebitCard();
+				///validating by DebitCard
+				card = new Card();
 				break;
 			case "Credit":
-				card = new CreditCard();
+				///validating by CreditCard
+				card = new Card();
 				break;
 		}
 		return card;

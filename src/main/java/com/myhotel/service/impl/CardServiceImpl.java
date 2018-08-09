@@ -21,7 +21,9 @@ public class CardServiceImpl implements CardService {
 	@Override
 	public Card save(Card entity) {
 		// TODO Auto-generated method stub
-		return cardRepository.save(entity);
+		System.out.println("Entity saving");
+		Card card = entity;
+		return cardRepository.save(card);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.myhotel.domain.Card;
+import com.myhotel.domain.DebitCard;
 import com.myhotel.domain.Payment;
 import com.myhotel.domain.booking.ConcreteServiceBuilder;
 import com.myhotel.domain.booking.ServiceDirector;
