@@ -18,10 +18,6 @@ public class Card {
     private Date expiredDate;
     private String expiredDateS;
 
-    public Card() {
-		super();
-	}
-
 	public String getHoldername() {
         return holdername;
     }
