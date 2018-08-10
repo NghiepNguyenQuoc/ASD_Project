@@ -10,8 +10,6 @@ import com.myhotel.repository.PromotionRepository;
 import com.myhotel.service.ApplicationContextHolder;
 import com.myhotel.service.CardService;
 import com.myhotel.service.HotelUserService;
-import com.myhotel.service.impl.PromotionService;
-
 public class ConcreteHotelCustomer extends HotelCustomer {
     public ConcreteHotelCustomer(PromotionMediator promotionMediator, String promotionName, HotelUser hotelUser) {
         super(promotionMediator, promotionName, hotelUser);
