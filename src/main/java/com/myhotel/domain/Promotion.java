@@ -57,6 +57,18 @@ public class Promotion implements PromotionPrototype {
 
     @Override
     public Promotion doClone() {
-        return null;
+    	Promotion promo= new Promotion();
+    	promo.setDiscount(this.getDiscount());
+    	promo.setPercent(this.getPercent());
+    	promo.setName(this.getName());
+        return promo;
     }
+    
+    public static Promotion samplePromo;
+	static {
+		samplePromo = new Promotion();
+		samplePromo.setDiscount(20);
+		samplePromo.setPercent(20);
+		samplePromo.setName("HotelPromo");
+	}
 }
