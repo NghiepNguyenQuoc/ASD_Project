@@ -1,6 +1,8 @@
 /target/
-
+src/main/resources/application.properties
 .settings/
+*.bak
+
 *~
 .DS_Store
 .settings
@@ -15,4 +17,4 @@ maven*.jar
 .mvn
 mvnw.*
 mvnw
-src/main/resources/application.properties
+
