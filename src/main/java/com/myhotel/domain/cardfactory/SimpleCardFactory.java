@@ -1,8 +1,8 @@
 package com.myhotel.domain.cardfactory;
 
 import com.myhotel.domain.Card;
-import com.myhotel.domain.CreditCard;
-import com.myhotel.domain.DebitCard;
+import com.myhotel.domain.VisaCard;
+import com.myhotel.domain.MasterCard;
 
 public class SimpleCardFactory implements CardFactory {
 	private static CardFactory factory = new SimpleCardFactory();
@@ -16,15 +16,16 @@ public class SimpleCardFactory implements CardFactory {
 		Card card = null;
 		
 		switch (cardType) {
-			case "Normal":
+			case "Visa":
+				///validating by Visa type
 				card = new Card();
 				break;
-			case "Debit":
-				///validating by DebitCard
+			case "Master":
+				///validating by Master type
 				card = new Card();
 				break;
-			case "Credit":
-				///validating by CreditCard
+			case "Discover":
+				///validating by Discover type
 				card = new Card();
 				break;
 		}

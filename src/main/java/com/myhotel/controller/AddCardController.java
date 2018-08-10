@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.myhotel.domain.Card;
-import com.myhotel.domain.DebitCard;
+import com.myhotel.domain.MasterCard;
 import com.myhotel.domain.Payment;
 import com.myhotel.domain.booking.ConcreteServiceBuilder;
 import com.myhotel.domain.booking.ServiceDirector;
@@ -101,6 +101,6 @@ public class AddCardController extends ApplicationController implements Initiali
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		this.cardType.getItems().addAll("Normal", "Debit", "Credit");
+		this.cardType.getItems().addAll("Visa", "Master", "Discover");
 	}
 }
