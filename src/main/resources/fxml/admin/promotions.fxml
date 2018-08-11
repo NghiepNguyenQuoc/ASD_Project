@@ -20,30 +20,43 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.admin.controller.PromotionController">
-   <children>
-      <TableView fx:id="tablePromotion" layoutX="6.0" layoutY="6.0" prefHeight="200.0" prefWidth="412.0">
-        <columns>
-          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="colName" prefWidth="118.0" text="Promotion Name" />
-            <TableColumn fx:id="colDiscount" minWidth="1.0" prefWidth="104.0" text="Discount" />
-            <TableColumn fx:id="colPercent" minWidth="0.0" prefWidth="106.0" text="Percent" />
-        </columns>
-      </TableView>
-      <TitledPane fx:id="createPane" animated="false" expanded="false" layoutX="6.0" layoutY="213.0" prefHeight="94.0" prefWidth="412.0" text="Create new promotion">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="62.0" prefWidth="410.0">
-               <children>
-                  <TextField  fx:id="txtName" layoutX="59.0" layoutY="6.0" prefHeight="25.0" prefWidth="344.0" />
-                  <Label layoutX="6.0" layoutY="10.0" text="Name" />
-                  <Label layoutX="5.0" layoutY="41.0" text="Discount" />
-                  <TextField fx:id="txtDiscount" layoutX="59.0" layoutY="37.0" prefHeight="25.0" prefWidth="72.0" />
-                  <TextField fx:id="txtPercent" layoutX="195.0" layoutY="37.0" prefHeight="25.0" prefWidth="72.0" />
-                  <Label layoutX="150.0" layoutY="41.0" prefHeight="17.0" prefWidth="55.0" text="Percent" />
-                  <Button fx:id="btnCreate" layoutX="272.0" layoutY="37.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="132.0" text="Create" />
-               </children>
-            </AnchorPane>
-         </content>
-      </TitledPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myhotel.admin.promotion.PromotionController">
+	<children>
+		<VBox fx:id="tableContainer">
+			<children>
+				<Button mnemonicParsing="false" text="New Promotion" onAction="#onNewPromotion">
+					<VBox.margin>
+						<Insets left="0.0" right="5.0" bottom="5.0" />
+					</VBox.margin>
+				</Button>	 
+				<TableView fx:id="tablePromotion">
+					<columns>
+						<TableColumn fx:id="colID" text="ID" />
+						<TableColumn fx:id="colName" 
+							text="Promotion Name" />
+						<TableColumn fx:id="colDiscount" minWidth="1.0"
+							prefWidth="104.0" text="Discount" />
+						<TableColumn fx:id="colPercent" minWidth="0.0"
+							prefWidth="106.0" text="Percent" />
+					</columns>
+				</TableView>
+			</children>
+		</VBox>
+		<AnchorPane fx:id = "formContainer"  minHeight="0.0" minWidth="0.0" prefHeight="313.0" prefWidth="448.0">
+			<children>
+				<TextField fx:id="txtName" layoutX="83.0" layoutY="26.0" prefHeight="25.0" prefWidth="344.0" />
+				<Label layoutX="16.0" layoutY="31.0" text="Name" />
+				<Label layoutX="15.0" layoutY="62.0" text="Discount" />
+				<TextField fx:id="txtDiscount" layoutX="83.0" layoutY="61.0" prefHeight="25.0" prefWidth="72.0" />
+				<TextField fx:id="txtPercent" layoutX="219.0" layoutY="61.0" prefHeight="25.0" prefWidth="72.0" />
+				<Label layoutX="174.0" layoutY="65.0" prefHeight="17.0" prefWidth="55.0" text="Percent" />
+
+				<Button fx:id="btnCreate" layoutX="83.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="25.0" prefWidth="90" text="Create" />
+				<TextArea fx:id="txtDescription" layoutX="83.0" layoutY="106.0" prefHeight="111.0" prefWidth="344.0" />
+				<Label layoutX="14.0" layoutY="99.0" text="Description" />
+				<Button layoutX="180.0" layoutY="227.0" mnemonicParsing="false" onAction="#onUndo" prefHeight="25.0" prefWidth="90" text="Undo" />
+				<Button layoutX="278.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="25.0" prefWidth="90" text="Cancel" />
+			</children>
+		</AnchorPane>
+	</children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package com.myhotel;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -43,6 +44,7 @@ public class Main extends Application {
     	
         stageManager = springContext.getBean(StageManager.class, stage);
         displayInitialScene();
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/hotel-256.gif")));
     }
 
     @Override

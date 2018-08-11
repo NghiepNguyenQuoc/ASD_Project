@@ -164,15 +164,13 @@ public class LoginController implements Initializable {
 	}
 
 	@Scheduled(cron = "0/45 * * * * *")
-	public void broadCastPromotionToHoterlUser() {
+	public void broadCastPromotionToHotelUser() {
 		if (currentUser != null) {
 			if (didSetUpMediator == false) {
 				setupPromotionMediator();
 				didSetUpMediator = true;
-				System.out.println("did setup Mediator");
 			}
 			currentHotelCustomer.sendPromotion(PromotionName.SpringHoliday.toString());
-			System.out.println("BroadCast holiday promotion");
 		}
 	}
 }

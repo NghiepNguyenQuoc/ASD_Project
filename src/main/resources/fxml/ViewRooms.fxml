@@ -25,7 +25,7 @@
    <left>
       <VBox prefHeight="573.0" prefWidth="281.0" spacing="10.0" styleClass="background" stylesheets="@../styles/Styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Searching" textFill="WHITE">
+            <Label text="Search" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
