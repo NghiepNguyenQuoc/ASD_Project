@@ -28,14 +28,14 @@ public class ConcreteHotelCustomer extends HotelCustomer {
     @Override
     public void receivePromotion(String promotionName) {
     	
-//        HolidayPromotion holidayPromotion = new ConcretePromotionFactory().createPromotion(promotionName);
-//        Promotion promotion = holidayPromotion.getPromotion();
-//        HotelUserService hotelUserService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
-//        HotelUser hotelUser = hotelUserService.find(this.hotelUser.getId());
-//        hotelUser.getPromotions().add(promotion);
-//        PromotionRepository promotionRepository = PromotionRepositorySingleton.INSTANCE.getPromotionRepository();
+        HolidayPromotion holidayPromotion = new ConcretePromotionFactory().createPromotion(promotionName);
+        Promotion promotion = holidayPromotion.getPromotion();
+        HotelUserService hotelUserService = ApplicationContextHolder.getContext().getBean(HotelUserService.class);
+        HotelUser hotelUser = hotelUserService.find(this.hotelUser.getId());
+        hotelUser.getPromotions().add(promotion);
+        PromotionRepository promotionRepository = PromotionRepositorySingleton.INSTANCE.getPromotionRepository();
 //        promotionRepository.save(promotion);
-//        HotelUserRepository hotelUserRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
+        HotelUserRepository hotelUserRepository = ApplicationContextHolder.getContext().getBean(HotelUserRepository.class);
 //        hotelUserRepository.save(hotelUser);
     }
 }
