@@ -255,7 +255,7 @@ public class SampleDataService {
 		bookingRepository.save(booking);
 	}
 
-	private String format(Date date) {
+	public static String format(Date date) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
 		return formatter.format(date);
 	}

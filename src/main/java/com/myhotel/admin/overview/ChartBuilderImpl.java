@@ -1,7 +1,9 @@
 package com.myhotel.admin.overview;
 
+import java.sql.Date;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -75,16 +77,29 @@ public class ChartBuilderImpl implements ChartBuilder {
 		Map<String, Double> monthlyData = new TreeMap<>();
 		Calendar c = Calendar.getInstance();
 		for (Booking b : bookingList) {
-			c.setTime(b.getEndDate());
-			String strYearMonth = c.get(Calendar.YEAR) + "-" + String.format("%02d", c.get(Calendar.MONTH) + 1);
-			double total = 0;
-			if (monthlyData.containsKey(strYearMonth)) {
-				total = monthlyData.get(strYearMonth);
+			java.util.Date endDate = b.getEndDate();
+			if (endDate == null) {
+				String strDate = b.getEndDate_S();
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy");
+				try {
+					endDate = formatter.parse(strDate);
+				} catch (ParseException e) {
+//					ignore
+				}
 			}
-			if (b.getPayment() != null) {
-				total += b.getPayment().getAmount();
+			if (endDate != null) {
+				c.setTime(b.getEndDate());
+				String strYearMonth = c.get(Calendar.YEAR) + "-" + String.format("%02d", c.get(Calendar.MONTH) + 1);
+				double total = 0;
+				if (monthlyData.containsKey(strYearMonth)) {
+					total = monthlyData.get(strYearMonth);
+				}
+				if (b.getPayment() != null) {
+					total += b.getPayment().getAmount();
+				}
+				monthlyData.put(strYearMonth, total);
 			}
-			monthlyData.put(strYearMonth, total);
+			
 		}
 		return monthlyData;
 	}
