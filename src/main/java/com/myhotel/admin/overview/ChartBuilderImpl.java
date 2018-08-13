@@ -88,7 +88,7 @@ public class ChartBuilderImpl implements ChartBuilder {
 				}
 			}
 			if (endDate != null) {
-				c.setTime(b.getEndDate());
+				c.setTime(endDate);
 				String strYearMonth = c.get(Calendar.YEAR) + "-" + String.format("%02d", c.get(Calendar.MONTH) + 1);
 				double total = 0;
 				if (monthlyData.containsKey(strYearMonth)) {
